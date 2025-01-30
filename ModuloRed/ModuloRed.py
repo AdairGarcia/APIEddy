@@ -17,22 +17,6 @@ class ModuloRed:
     @staticmethod
     def get_interfaz_red():
             return "wlan1"
-    
-    def escanear_redes_wifi(self):
-        try:
-            # Usar wlan1 explícitamente para escanear redes Wi-Fi
-            redes_wifi_cmd = subprocess.run(
-                ['nmcli', '-t', '-f', 'SSID,SIGNAL,SECURITY', 'device', 'wifi', 'list', 'ifname', self.interfaz_red],
-                capture_output=True, text=True
-            )
-            if redes_wifi_cmd.returncode != 0:
-                return False, f"Error al escanear redes Wi-Fi: {redes_wifi_cmd.stderr.strip()}"
-            
-            redes_wifi = self.extraer_datos_redes_wifi(redes_wifi_cmd.stdout)
-            return True, redes_wifi
-
-        except Exception as e:
-            return False, str(e)
 
     def listar_redes_wifi(self):
         try:
